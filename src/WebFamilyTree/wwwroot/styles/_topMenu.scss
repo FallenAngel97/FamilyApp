@@ -1,0 +1,21 @@
+// The top logo panel
+$backgroundTopColor: #502105;
+
+.textBlockHeader
+{
+    vertical-align: top;
+    background: $backgroundTopColor;
+    width: 170px;
+    height:40px;
+    font-size: 28px;
+    padding: 20px 0 15px 25px; 
+    display: inline-block;
+    text-shadow: -1px -1px 0 #371616, 1px -1px 0 #371616, -1px 1px 0 #371616, 1px 1px 0 #371616;
+}
+.triangle
+{
+    vertical-align: top;
+    display: inline-block;
+    border-left: 80px solid $backgroundTopColor;
+    border-bottom:75px solid transparent;
+}

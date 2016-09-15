@@ -4,10 +4,10 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-</head>
+    <link rel="stylesheet" type="text/css" href="@ViewBag.cssText" />
+ </head>
 <body>
-    <div>
-        @RenderBody()
-    </div>
+    @RenderBody()
+    <script src="@ViewBag.jsText"></script>
 </body>
 </html>

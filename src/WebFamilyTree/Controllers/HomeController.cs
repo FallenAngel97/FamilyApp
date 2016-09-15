@@ -13,6 +13,15 @@ namespace WebFamilyTree.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+#if DEBUG
+            ViewBag.cssText = "css/main.css";
+            ViewBag.jsText = "typescript/main.js";
+            ViewBag.imageBase = "images";
+#else
+            ViewBag.cssText = "css/main.min.css";
+            ViewBag.jsText = "js/main.js";
+            ViewBag.imageBase = "img";
+#endif
             return View();
         }
     }

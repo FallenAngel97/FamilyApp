@@ -1,0 +1,22 @@
+$backgroundColor: #372507;
+$textColor: #e2d8c8;
+
+html, body
+{
+    overflow: hidden;
+    color: $textColor;
+    font-family: Bitter;
+    width: 100%;
+    margin:0;
+    padding: 0;
+    font-size: 0;
+    height: 100%;
+    background: $backgroundColor;
+    display: flex;
+    flex-direction: column;
+}
+
+@import "fonts";
+@import "topMenu"; 
+@import "mainBlock";
+@import "bottomPanel";

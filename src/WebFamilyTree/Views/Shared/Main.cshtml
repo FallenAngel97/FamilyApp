@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<main>
+    <h2 id="greetingText">
+        Make your ancestry 
+        <span>digital!</span>
+    </h2>
+    <section>
+        <div class="helpText">
+            <div class="actuallyText">
+                Use directional buttons(Up, down etc) to move the image to the right place. Use the +\- buttons to resize it.
+            </div>
+            <div class="helpers">
+                <div id="closeButton">X</div>
+                <div id="triangle"></div>
+            </div>
+        </div>
+        <div class="singlePersonWrapper">
+            <div class="personHolder">
+                <div class="movePersonCircle" draggable="true"></div>
+                <div class="addTree">+</div>
+                <div class="addTree right">+</div>
+                <br />
+                <img class="leftTree" src="@(ViewBag.imageBase)/tree-left.svg" />
+                <img class="rightTree" src="@(ViewBag.imageBase)/tree-right.svg" />
+                <div class="singlePerson">
+                    <img class="emptyPersonImage" src="@(ViewBag.imageBase)/noperson.svg"/>
+                    <input type="file" accept="image/*" />
+                </div>
+                <div class="infoAdd">i</div>
+                <div class="credentialsBlock"></div>
+                <br />
+                <input type="text" value="John" placeholder="John"/>
+                <br />
+                <input type="text" value="Doe" placeholder="Doe"/>
+                <input type="hidden" class="biography" />
+            </div>
+        </div>
+    </section>
+</main>

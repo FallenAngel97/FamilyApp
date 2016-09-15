@@ -1,0 +1,4 @@
+﻿node_modules/
+tempSelectors/
+.sass-cache/
+Views/**/*.min.cshtml

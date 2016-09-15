@@ -1,6 +1,18 @@
-﻿@*
+﻿@using WebFamilyTree.Models;
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-
+    ViewBag.Title = "WebFamilyTree";
+    if(AreWeDebug.IsDebug())
+    {
+        Html.RenderPartial("TopPanel");
+        Html.RenderPartial("Main");
+        Html.RenderPartial("BotStatic");
+    } else
+    {
+        Html.RenderPartial("TopPanel.min");
+        Html.RenderPartial("Main.min");
+        Html.RenderPartial("BotStatic.min");
+    }
 }

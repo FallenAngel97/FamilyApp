@@ -1,0 +1,300 @@
+html, body {
+  overflow: hidden;
+  color: #e2d8c8;
+  font-family: Bitter;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  height: 100%;
+  background: #372507;
+  display: flex;
+  flex-direction: column; }
+
+@font-face {
+  src: url("Bitter-Regular.otf");
+  font-family: Bitter; }
+.textBlockHeader {
+  vertical-align: top;
+  background: #502105;
+  width: 170px;
+  height: 40px;
+  font-size: 28px;
+  padding: 20px 0 15px 25px;
+  display: inline-block;
+  text-shadow: -1px -1px 0 #371616, 1px -1px 0 #371616, -1px 1px 0 #371616, 1px 1px 0 #371616; }
+
+.triangle {
+  vertical-align: top;
+  display: inline-block;
+  border-left: 80px solid #502105;
+  border-bottom: 75px solid transparent; }
+
+@keyframes dropHeader {
+  0% {
+    width: 0; }
+  100% {
+    width: 546px; } }
+@keyframes changeOpacity {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column; }
+
+.singlePersonWrapper {
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+#greetingText {
+  text-align: center;
+  font-size: 40px;
+  color: #FFF; }
+  #greetingText span {
+    font-style: italic; }
+  #greetingText:after {
+    height: 1px;
+    background: #FFF;
+    content: "";
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 0;
+    -webkit-animation-name: dropHeader;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-duration: 0.6s;
+    animation-name: dropHeader;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s; }
+
+section {
+  position: relative;
+  opacity: 0;
+  -webkit-animation-name: changeOpacity;
+  -webkit-animation-delay: 1.6s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-duration: 0.6s;
+  animation-name: changeOpacity;
+  animation-delay: 1.6s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-duration: 0.6s;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: -20px; }
+
+.credentialsBlock {
+  height: 50px;
+  width: 50%;
+  position: absolute;
+  background-color: rgba(51, 33, 33, 0.8);
+  border-radius: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 25%;
+  margin-top: 2px; }
+
+.addTree {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.2);
+  transition: .2s ease-in-out color;
+  cursor: pointer;
+  display: none; }
+  .addTree:hover {
+    color: #FFF; }
+  .addTree.right {
+    margin-left: 92px; }
+
+.treeShown {
+  visibility: hidden; }
+
+.infoAdd {
+  font-size: 16px;
+  color: #FFF;
+  background: blue;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  text-align: center;
+  position: absolute;
+  top: calc(50% + 6px);
+  margin-left: -5px;
+  cursor: pointer; }
+
+textarea {
+  width: 512px;
+  height: 320px;
+  resize: none;
+  background: #440949;
+  border: solid 1px gray, solid 1px white, solid 1px black, solid 2px green;
+  font-size: 18px;
+  color: #FFF;
+  padding: 10px;
+  border-width: 1px 1px 1px 5px;
+  border-color: #FFF #FFF #FFF #ff4b00;
+  position: absolute;
+  top: -268px;
+  box-shadow: 1px 1px 10px #FFF;
+  left: -351px; }
+  textarea:before {
+    content: '';
+    width: 100%;
+    height: 20px; }
+
+.leftTree, .rightTree {
+  width: 200px;
+  display: none;
+  position: absolute; }
+
+.rightTree {
+  top: -75px;
+  right: -67px;
+  transform: rotate(-39deg); }
+
+.leftTree {
+  transform: rotate(-139deg);
+  top: -78px;
+  left: -69px; }
+
+.singlePerson {
+  border: solid 2px #bf2622;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+  position: relative; }
+  .singlePerson input {
+    visibility: hidden; }
+
+.movePersonCircle {
+  z-index: 1;
+  position: absolute;
+  left: calc(50% - 5px);
+  height: 10px;
+  width: 10px;
+  background: gray;
+  border-radius: 5px;
+  cursor: move;
+  top: 10px; }
+
+.personHolder {
+  cursor: default;
+  position: relative;
+  display: inline-block; }
+  .personHolder input[type="text"] {
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: #e2d8c8;
+    line-height: 1px;
+    font-size: 24px;
+    position: inherit;
+    z-index: 1; }
+    .personHolder input[type="text"]:focus {
+      text-decoration: underline; }
+
+.emptyPersonImage {
+  width: 65px;
+  margin-top: 5px; }
+
+.helpText {
+  position: absolute;
+  font-size: 16px;
+  height: 102px;
+  width: 200px;
+  top: -95px;
+  display: none;
+  left: 414px;
+  background-color: #260429;
+  border-left: solid 4px #bfceab;
+  color: #FFF;
+  box-shadow: 1px 1px 4px #a79a9a; }
+
+.actuallyText {
+  position: absolute; }
+
+.helpers {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  position: relative; }
+
+#closeButton {
+  float: right;
+  margin-top: -20px;
+  font-size: 27px;
+  color: #b03526;
+  font-family: Arial;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px black; }
+
+#triangle {
+  vertical-align: bottom;
+  margin-top: 99px;
+  border-right: solid #260429 20px;
+  border-bottom: solid 29px transparent;
+  margin-left: 180px;
+  position: absolute;
+  box-shadow: 4px 0px 3px -3px #a79a9a; }
+
+footer {
+  width: 100%;
+  display: flex;
+  align-items: flex-end; }
+
+.saver {
+  text-align: center;
+  background: #462136;
+  padding: 20px;
+  transition: .3s ease-in-out box-shadow; }
+  .saver:hover {
+    box-shadow: 0 0 10px gray; }
+
+.scaler {
+  display: inline-block;
+  padding: 5px;
+  margin-right: auto;
+  position: relative;
+  width: 193px; }
+  .scaler input[type="range"] {
+    transform: rotate(-90deg);
+    position: absolute;
+    display: none;
+    right: 2px;
+    bottom: 79px; }
+
+.saveAsText {
+  font-size: 24px; }
+
+span.text {
+  font-size: 18px;
+  font-weight: bold; }
+
+.formats {
+  padding: 0; }
+  .formats li {
+    display: inline;
+    font-size: 16px;
+    transition: .3s ease-in-out color; }
+    .formats li:hover:not(.sep) {
+      cursor: pointer;
+      color: #91774d; }
+
+.scaleNumber {
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: underline; }

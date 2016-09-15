@@ -1,0 +1,73 @@
+$backgroundSaverColor: #462136;
+$text-color: #e2d8c8;
+footer
+{ 
+    width:100%;
+    display: flex;
+    align-items: flex-end;
+    position:fixed;
+    bottom:0;
+}
+
+.saver
+{
+    text-align: center;
+    background: $backgroundSaverColor;
+    padding: 20px;
+    transition: .3s ease-in-out box-shadow;
+    &:hover
+    {
+        box-shadow: 0 0 10px gray;
+    }
+}
+
+.scaler 
+{  
+    display: inline-block;
+    padding: 5px;
+    margin-right:auto;
+    position: relative;
+    width: 193px;
+    input[type="range"]
+    {
+        transform: rotate(-90deg);
+        position: absolute;
+        display: none;
+        right: 2px;
+        bottom: 79px;
+    }
+}
+
+.saveAsText
+{
+    font-size: 24px;
+}
+
+span.text
+{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.formats
+{
+    padding: 0;
+    li
+    {
+        display: inline;
+        font-size: 16px;
+        transition: .3s ease-in-out color;
+        &:hover:not(.sep)
+        {
+            cursor: pointer;
+            color: darken($color: $text-color, $amount: 40%)
+        }
+    }
+}
+
+.scaleNumber
+{
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: underline;
+}
