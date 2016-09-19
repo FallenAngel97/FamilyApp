@@ -6,6 +6,8 @@ let persons = getClass("singlePerson");
 let currentImage: HTMLImageElement = null;
 let disablePopupImageHelp:boolean = false;
 let scaleText = getClass("scaleNumber")[0] as HTMLSpanElement;
+let offsetTop: number = -168;
+let canMove: boolean = false;
 
 //Initial settings
 titleElement.style.opacity="1";
@@ -43,7 +45,9 @@ scaleText.onclick = function(e)
         HideTheTitle();
     }
 }
-
+document.body.ondblclick = function () {
+    canMove = !canMove;
+}
 //Hide the "Make ... digital" text, slowly dragging the text to top
 function HideTheTitle()
 {
@@ -67,6 +71,14 @@ function handleDragStart(e) {
   this.parentElement.parentElement.style.opacity = '0.4';  // this / e.target is the source node.
 }
 
+function rotateSettings(elementBase: HTMLElement, elementModify: HTMLElement) {
+// ratio is 200 : 403
+    let widthBase = parseInt(getComputedStyle(elementBase)["width"]);
+    let widthElement = parseInt(getComputedStyle(elementModify)["width"]);
+    let heightElement = parseInt(getComputedStyle(elementModify)["height"]);
+    elementModify.style.cssText = "display:block;left:calc(50% - " + (widthElement / 2 - 10) + "px); top:-" + (heightElement) + "px;transform-origin:" + (widthElement / 2 - 10) + "px " + (widthBase / 2 + heightElement) + "px;";
+    //elementModify.style.cssText = "display:block;left:calc(50% - 77.5px);top: -196px;transform-origin: 77.5px 260px 0px;background-position: 48px 1px;"
+};
 
 function handleDragOver(e) {
   if (e.preventDefault) {
@@ -77,7 +89,15 @@ function handleDragOver(e) {
 
   return false;
 }
-
+document.onmousemove = function (e) {
+    let rect = getClass("boundingRectangle")[getClass("boundingRectangle").length - 1].getBoundingClientRect();
+    if (canMove == false || rect === undefined)
+        return;
+    console.log(e.pageX);
+    let boxCenter = [rect.left + 20, rect.top + 20];
+    let angle = Math.atan2(e.pageX - boxCenter[0], - (e.pageY - boxCenter[1])) * (180 / Math.PI);
+    getClass("leftTree")[getClass("leftTree").length - 2].style.transform = "rotate(" + angle + "deg)";
+};
 var cols = document.querySelectorAll('.movePersonCircle');
 [].forEach.call(cols, function(col:HTMLElement) {
 
@@ -137,39 +157,46 @@ document.onclick = function(e)
         BiographyProcess(infoBlock);
         return;
     }
-    if(classOfElement.indexOf("addTree")>-1)  // Handle click on the pluses near the person head
+    if (classOfElement.indexOf("addTree") > -1)  // Handle click on the pluses near the person head
     {                                                                                      // By default, it triggers left tree
         let elem = infoBlock.parentElement
             .getElementsByClassName("leftTree")[0] as HTMLDivElement;
-        let leftOne:boolean = true;
-        if(classOfElement.indexOf("right")>-1)   // But on this line we checking for right
+        let leftOne: boolean = true;
+        if (classOfElement.indexOf("right") > -1)   // But on this line we checking for right
         {
             elem = infoBlock.parentElement
-            .getElementsByClassName("rightTree")[0] as HTMLDivElement;
-            leftOne= false;
+                .getElementsByClassName("rightTree")[0] as HTMLDivElement;
+            leftOne = false;
         }                                                                                            //End of triggering the right tree
         elem.style.display = "block";
-        infoBlock.className+=" treeShown";
+        infoBlock.className += " treeShown";
         let positions = elem.getBoundingClientRect();
         let dynamicElementWrapper = document.createElement("div");
         dynamicElementWrapper.className = "singlePersonWrapper";
         dynamicElementWrapper.style.position = "absolute";
-        if(leftOne)
-            dynamicElementWrapper.style.left = positions.left - 80+"px"
+        if (leftOne)
+            dynamicElementWrapper.style.left = positions.left - 80 + "px"
         else
-            dynamicElementWrapper.style.left = positions.right-180+"px"
-        dynamicElementWrapper.style.top = positions.top - positions.bottom + 40 + "px";
-        let clone = document.getElementsByClassName("personHolder")[0].cloneNode(true) as HTMLDivElement;
-        
-        for (let i = 0; i < clone.children.length; i++)
+            dynamicElementWrapper.style.left = positions.right - 180 + "px"
+        dynamicElementWrapper.style.top = offsetTop + "px";
+        offsetTop *= 2;
+        let holder = getClass("personHolder")[getClass("personHolder").length - 1] as HTMLDivElement;
+        let clone = holder.cloneNode(true) as HTMLDivElement;
+
+        for (let i = 0; i < clone.childElementCount; i++)
         {
             var child = clone.children[i] as HTMLElement;
             let className = child.className;
             child.className = className.replace("treeShown", "");
-
-            if (className.indexOf("Tree") > -1 && child.nodeName == "IMG") {
+            if (className == "boundingRectangle") {
+                let subchild = child.children[0] as HTMLDivElement;
+                for (let i = 0; i < subchild.childElementCount; i++) 
+                    subchild.children[i].removeAttribute("style");
+                
+            }
+            if (className.indexOf("leftTree") > -1 || className.indexOf("rightTree") > -1) {
                 child.removeAttribute("style");
-
+                rotateSettings(child, child);
             }
             if(className=="singlePerson")
             {
@@ -178,6 +205,18 @@ document.onclick = function(e)
                 (child.children[1] as HTMLImageElement).removeAttribute("style");
             }
         }
+
+        for (let i = 0; i < holder.childElementCount; i++) {
+            if (holder.children[i].className == "boundingRectangle") {
+                console.log(holder.children[i].children[0]);
+                let subchild = holder.children[i].children[0] as HTMLDivElement;
+                for (let i = 0; i < subchild.childElementCount; i++) {
+                    if (subchild.children[i].hasAttribute("style"))
+                        rotateSettings(subchild, subchild.children[i] as HTMLElement);
+                }
+            }
+        }
+
         dynamicElementWrapper.appendChild(clone);
         getTag("section")[0].appendChild(dynamicElementWrapper);
         console.log(document.getElementsByClassName("rightTree")[1].y);

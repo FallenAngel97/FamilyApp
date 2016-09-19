@@ -91,8 +91,7 @@ section {
   animation-fill-mode: forwards;
   animation-duration: 0.6s;
   text-align: center;
-  margin-top: auto;
-  margin-bottom: -20px; }
+  margin-top: 245px; }
 
 .credentialsBlock {
   height: 50px;
@@ -154,19 +153,20 @@ textarea {
     height: 20px; }
 
 .leftTree, .rightTree {
-  width: 200px;
+  width: 155px;
+  height: 207px;
   display: none;
-  position: absolute; }
+  position: absolute;
+  z-index: 4; }
 
 .rightTree {
-  top: -75px;
-  right: -67px;
-  transform: rotate(-39deg); }
+  background: url("../img/tree-right.svg") no-repeat;
+  background-size: 100px auto; }
 
 .leftTree {
-  transform: rotate(-139deg);
-  top: -78px;
-  left: -69px; }
+  background: url("../img/tree-left.svg") no-repeat;
+  background-size: 100px auto;
+  background-position: 48px 1px; }
 
 .singlePerson {
   border: solid 2px #bf2622;
@@ -176,9 +176,22 @@ textarea {
   overflow: hidden;
   display: inline-block;
   cursor: pointer;
-  position: relative; }
+  position: relative;
+  z-index: 3; }
   .singlePerson input {
     visibility: hidden; }
+
+.boundingRectangle {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: calc(50% - 76px);
+  left: calc(50% - 45px); }
+
+.boundingCircle {
+  position: relative;
+  height: 100%;
+  width: 100%; }
 
 .movePersonCircle {
   z-index: 1;
@@ -254,7 +267,9 @@ textarea {
 footer {
   width: 100%;
   display: flex;
-  align-items: flex-end; }
+  align-items: flex-end;
+  position: fixed;
+  bottom: 0; }
 
 .saver {
   text-align: center;

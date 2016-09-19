@@ -2,3 +2,6 @@
 tempSelectors/
 .sass-cache/
 Views/**/*.min.cshtml
+wwwroot/img/*
+wwwroot/js/*
+wwwroot/css/*
