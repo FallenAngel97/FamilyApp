@@ -40,6 +40,9 @@ html, body {
     opacity: 0; }
   100% {
     opacity: 1; } }
+article {
+  position: absolute; }
+
 main {
   flex-grow: 1;
   display: flex;

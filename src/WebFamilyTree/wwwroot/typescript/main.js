@@ -17,18 +17,14 @@ slider.onchange = function (value) {
     getTag("main")[0].style.transform = "scale(" + parseInt(slider.value) / 100 + ")";
 };
 document.querySelectorAll("ul.formats li")[0].onclick = function () {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "ajaxer.php", true);
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4)
-            if (xmlhttp.status == 200)
-                console.log(xmlhttp.responseText);
-            else
-                console.log("error: " + xmlhttp.statusText);
-    };
-    var formData = new FormData();
-    formData.append("htmlToParse", document.documentElement.innerHTML);
-    xmlhttp.send(formData);
+    console.log("CLICK");
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = "/Home/ScreenShot";
+    form.innerHTML = "<input type='hidden' value='" + document.documentElement.innerHTML + "' name='htmlToParse'>";
+    document.body.appendChild(form);
+    form.submit();
+    console.log(form);
 };
 //Handle click to show zoom slider
 scaleText.onclick = function (e) {
@@ -63,6 +59,7 @@ function handleDragStart(e) {
 function rotateSettings(elementBase, elementModify) {
     // ratio is 200 : 403
     var widthBase = parseInt(getComputedStyle(elementBase)["width"]);
+    console.log(elementBase);
     var widthElement = parseInt(getComputedStyle(elementModify)["width"]);
     var heightElement = parseInt(getComputedStyle(elementModify)["height"]);
     elementModify.style.cssText = "display:block;left:calc(50% - " + (widthElement / 2 - 10) + "px); top:-" + (heightElement) + "px;transform-origin:" + (widthElement / 2 - 10) + "px " + (widthBase / 2 + heightElement) + "px;";
@@ -81,7 +78,7 @@ document.onmousemove = function (e) {
     if (canMove == false || rect === undefined)
         return;
     console.log(e.pageX);
-    var boxCenter = [rect.left + 20, rect.top + 20];
+    var boxCenter = [rect.left + 50, rect.top + 50];
     var angle = Math.atan2(e.pageX - boxCenter[0], -(e.pageY - boxCenter[1])) * (180 / Math.PI);
     getClass("leftTree")[getClass("leftTree").length - 2].style.transform = "rotate(" + angle + "deg)";
 };
@@ -176,7 +173,6 @@ document.onclick = function (e) {
         }
         for (var i = 0; i < holder.childElementCount; i++) {
             if (holder.children[i].className == "boundingRectangle") {
-                console.log(holder.children[i].children[0]);
                 var subchild = holder.children[i].children[0];
                 for (var i_2 = 0; i_2 < subchild.childElementCount; i_2++) {
                     if (subchild.children[i_2].hasAttribute("style"))

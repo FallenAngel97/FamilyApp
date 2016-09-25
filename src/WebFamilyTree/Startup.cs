@@ -28,6 +28,7 @@ namespace WebFamilyTree
             {
                 app.UseDeveloperExceptionPage();
             }
+            //app.UseDeveloperExceptionPage();
 
             app.UseMvcWithDefaultRoute();
         }

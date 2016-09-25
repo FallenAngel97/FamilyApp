@@ -22,17 +22,14 @@ slider.onchange=function(value)
 
 (document.querySelectorAll("ul.formats li")[0] as HTMLLIElement).onclick = function()
 {
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "ajaxer.php", true);
-    xmlhttp.onreadystatechange = function()
-    {
-        if(xmlhttp.readyState == 4)
-            if(xmlhttp.status == 200) console.log(xmlhttp.responseText);
-            else console.log("error: "+ xmlhttp.statusText);
-    };
-    let formData = new FormData();
-    formData.append("htmlToParse", document.documentElement.innerHTML);
-    xmlhttp.send(formData);
+    console.log("CLICK");
+    let form: HTMLFormElement = document.createElement("form");
+    form.method = "post";
+    form.action = "/Home/ScreenShot";
+    form.innerHTML = "<input type='hidden' value='" + document.documentElement.innerHTML + "' name='htmlToParse'>";
+    document.body.appendChild(form);
+    form.submit();
+    console.log(form);
 };
 
 //Handle click to show zoom slider
@@ -74,6 +71,7 @@ function handleDragStart(e) {
 function rotateSettings(elementBase: HTMLElement, elementModify: HTMLElement) {
 // ratio is 200 : 403
     let widthBase = parseInt(getComputedStyle(elementBase)["width"]);
+    console.log(elementBase)
     let widthElement = parseInt(getComputedStyle(elementModify)["width"]);
     let heightElement = parseInt(getComputedStyle(elementModify)["height"]);
     elementModify.style.cssText = "display:block;left:calc(50% - " + (widthElement / 2 - 10) + "px); top:-" + (heightElement) + "px;transform-origin:" + (widthElement / 2 - 10) + "px " + (widthBase / 2 + heightElement) + "px;";
@@ -94,7 +92,7 @@ document.onmousemove = function (e) {
     if (canMove == false || rect === undefined)
         return;
     console.log(e.pageX);
-    let boxCenter = [rect.left + 20, rect.top + 20];
+    let boxCenter = [rect.left + 50, rect.top + 50];
     let angle = Math.atan2(e.pageX - boxCenter[0], - (e.pageY - boxCenter[1])) * (180 / Math.PI);
     getClass("leftTree")[getClass("leftTree").length - 2].style.transform = "rotate(" + angle + "deg)";
 };
@@ -208,7 +206,6 @@ document.onclick = function(e)
 
         for (let i = 0; i < holder.childElementCount; i++) {
             if (holder.children[i].className == "boundingRectangle") {
-                console.log(holder.children[i].children[0]);
                 let subchild = holder.children[i].children[0] as HTMLDivElement;
                 for (let i = 0; i < subchild.childElementCount; i++) {
                     if (subchild.children[i].hasAttribute("style"))
